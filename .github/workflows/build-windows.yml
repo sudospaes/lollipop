@@ -1,0 +1,44 @@
+name: Release lollipop windows
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+        platform:
+          - amd64
+        include:
+          - os: windows-latest
+            osName: win
+          - platform: amd64
+            arch: x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup nodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: Build lollipop
+        run: |
+          # install dependencies and build
+          npm i
+          npm run make-${{ matrix.osName }}-${{ matrix.arch }}
+        
+      - name: Upload windows build to GH release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}     
+          file: lollipop-${{ matrix.osName }}-${{ matrix.arch }}.exe
+          asset_name: lollipop-${{ matrix.osName }}-${{ matrix.arch }}.exe
+          prerelease: true
