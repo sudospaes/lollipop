@@ -1,0 +1,50 @@
+name: Release lollipop for linux/mac
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+        platform:
+          - amd64
+          - arm64
+        include:
+          - os: ubuntu-latest
+            osName: linux 
+          - os: macos-latest
+            osName: macos
+          - platform: amd64
+            arch: x64
+          - platform: arm64
+            arch: arm64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup nodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: Build lollipop
+        run: |
+          # install dependencies and build
+          npm i
+          npm run make-${{ matrix.osName }}-${{ matrix.arch }}
+        
+      - name: Upload linux/mac builds to GH release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}     
+          file: lollipop-${{ matrix.osName }}-${{ matrix.arch }}
+          asset_name: lollipop-${{ matrix.osName }}-${{ matrix.arch }}
+          prerelease: true
