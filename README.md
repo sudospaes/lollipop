@@ -9,10 +9,11 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   <br>
   Linux/MacOS
     ```bash
+  chmod +x lollipop
   ./lollipop
   ```
   Windows
-    ```bash
+    ```ps
   ./lollipop.exe
   ```
   Type this commands for using guide:
@@ -24,7 +25,7 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   ./lollipop help down
   ```
   Windows
-    ```bash
+    ```ps
   ./lollipop.exe help get
   ./lollipop.exe help down
   ```
