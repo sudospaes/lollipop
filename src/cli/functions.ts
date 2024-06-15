@@ -146,14 +146,20 @@ export async function downloadAudio(link: string, tag: string) {
 
 export function merging(video: IVideoObject, audio: IAudioObject) {
   const path = `${video.title}-${video.quality}-${video.codec}.${video.extension}`;
+  let totalTime: number;
   ffmpeg()
     .mergeAdd(video.path)
     .mergeAdd(audio.path)
     .save(join(dirname(process.execPath), path))
-    .on("progress", () => {
+    .on("codecData", (data) => {
+      totalTime = parseInt(data.duration.replace(/:/g, ""));
+    })
+    .on("progress", (p) => {
+      const time = parseInt(p.timemark.replace(/:/g, ""));
+      const percent = (time / totalTime) * 100;
       readline.clearLine(process.stdout, 0);
       readline.cursorTo(process.stdout, 0);
-      process.stdout.write(`Merging video with audio...`);
+      process.stdout.write(`Merging video with audio - ${percent.toFixed(2)}%`);
     })
     .on("end", () => {
       console.log("\nMerging Done :D");
@@ -168,6 +174,7 @@ export function merging(video: IVideoObject, audio: IAudioObject) {
 
 export function conevrtToMp3(audio: IAudioObject) {
   const path = `${audio.title}-${audio.bitrate}kb.mp3`;
+  let totalTime: number;
   return new Promise<string>((resolve, reject) => {
     ffmpeg()
       .input(audio.path)
@@ -175,10 +182,15 @@ export function conevrtToMp3(audio: IAudioObject) {
       .audioBitrate(audio.bitrate)
       .audioChannels(audio.channels)
       .save(join(dirname(process.execPath), path))
-      .on("progress", () => {
+      .on("codecData", (data) => {
+        totalTime = parseInt(data.duration.replace(/:/g, ""));
+      })
+      .on("progress", (p) => {
+        const time = parseInt(p.timemark.replace(/:/g, ""));
+        const percent = (time / totalTime) * 100;
         readline.clearLine(process.stdout, 0);
         readline.cursorTo(process.stdout, 0);
-        process.stdout.write(`Converting to mp3...`);
+        process.stdout.write(`Converting to mp3 - ${percent.toFixed(2)}`);
       })
       .on("end", () => {
         console.log("\nAudio converted to mp3 file :D");
