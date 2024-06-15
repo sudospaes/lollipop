@@ -122,6 +122,7 @@ app
         Wrong.audioTagNotFound();
       }
     } else {
+      console.log("Let's go for highest quality...");
       const video = await downloadVideo(link, "highest");
       const audio = await downloadAudio(link, "highest");
       if (options.mp3) {
