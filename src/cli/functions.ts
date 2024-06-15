@@ -54,26 +54,20 @@ export async function downloadVideo(link: string, tag: string) {
     dirname(process.execPath),
     `${title}-${quality}-${codec}-video.${extension}`
   );
-  const tracker = {
-    start: Date.now(),
-    video: { downloaded: 0, total: Infinity },
-  };
   return new Promise<IVideoObject>((resolve, reject) => {
+    const start = Date.now();
     ytdl(link, { filter: (format) => format.itag == +tag })
       .on("progress", (_, downloaded, total) => {
-        tracker.video = { downloaded, total };
         readline.clearLine(process.stdout, 0);
         readline.cursorTo(process.stdout, 0);
         process.stdout.write(
-          `Downloading video: ${kbToSize(
-            tracker.video.downloaded
-          )} / ${kbToSize(tracker.video.total)}`
+          `Downloading video: ${kbToSize(downloaded)} / ${kbToSize(total)}`
         );
       })
       .on("finish", () => {
         Successful.videoDownloaded();
         const time = `Average video download time: ${secondstoTime(
-          (Date.now() - tracker.start) / 1000
+          (Date.now() - start) / 1000
         )}`;
         console.log(time);
         resolve({ path, title, extension, quality, codec });
@@ -112,26 +106,20 @@ export async function downloadAudio(link: string, tag: string) {
     dirname(process.execPath),
     `${title}-${bitrate}-${codec}-audio.${extension}`
   );
-  const tracker = {
-    start: Date.now(),
-    audio: { downloaded: 0, total: Infinity },
-  };
   return new Promise<IAudioObject>((resolve, reject) => {
+    const start = Date.now();
     ytdl(link, { filter: (format) => format.itag == +tag })
       .on("progress", (_, downloaded, total) => {
-        tracker.audio = { downloaded, total };
         readline.clearLine(process.stdout, 0);
         readline.cursorTo(process.stdout, 0);
         process.stdout.write(
-          `Downloaging audio: ${kbToSize(
-            tracker.audio.downloaded
-          )} / ${kbToSize(tracker.audio.total)}`
+          `Downloaging audio: ${kbToSize(downloaded)} / ${kbToSize(total)}`
         );
       })
       .on("finish", () => {
         Successful.audioDownloaded();
         const time = `Average video download time: ${secondstoTime(
-          (Date.now() - tracker.start) / 1000
+          (Date.now() - start) / 1000
         )}`;
         console.log(time);
         resolve({ path, title, codec, extension, channels, bitrate });
