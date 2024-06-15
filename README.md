@@ -1,11 +1,20 @@
 # lollipop 🍭
 A friendly and lovely cli youtube downloader written in typescript for Linux, MacOS, Windows.
+<br>
+![main](https://github.com/sudospaes/lollipop/assets/79229394/10d3f4c6-d075-420f-8a6c-7c77052c6042)
+
+## Features
+- Download video and audio separately
+- Auto merging you download video and audio together
+- Convert audios to mp3
+
+## Requirement
+- Lollipop use [ffmpeg](https://ffmpeg.org/), so you should installed that
 
 ## How to run
 - Download latest version from [release](https://github.com/sudospaes/lollipop/releases)
 - Rename downloaded file to `lollipop`
 - Open terminal or cmd and run lollipop:
-  <br>
   <br>
   Linux/MacOS
     ```bash
@@ -16,8 +25,7 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
     ```ps
   ./lollipop.exe
   ```
-  Type this commands for using guide:
-  <br>
+  lollipop has a built-in guide. Type these commands to find out what the commands and them flags do
   <br>
   Linux/MacOS
     ```bash
@@ -28,4 +36,21 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
     ```ps
   ./lollipop.exe help get
   ./lollipop.exe help down
+  ```
+  ## How to use (example)
+  Lollipop uses tags to download from YouTube. You have to provide him the desired video tag and the desired audio tag, for example, the command below:
+  ```bash
+  ./lollipop down youtube_link -v tag_number -a tag_number
+  ```
+  Lollipop has not left you alone to get the number tag. You can get the necessary information using the get command, see this example:
+  ```bash
+  ./lollipop get https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah
+  ```
+  You will get this output lollipop
+  <br>
+  ![get-command](https://github.com/sudospaes/lollipop/assets/79229394/37a55976-b14b-4a29-8926-fa74d3cca977)
+  <br>
+  Now you know video tag and audio tag. so, run this command to download them and auto-merging with lollipop:
+  ```bash
+  ./lollipop down https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah -v 137 -a 251
   ```
