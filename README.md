@@ -1,6 +1,7 @@
 # lollipop 🍭
+
 A friendly and lovely cli youtube downloader written in typescript for Linux, MacOS, Windows.
-<br>
+
 ![main](https://github.com/sudospaes/lollipop/assets/79229394/10d3f4c6-d075-420f-8a6c-7c77052c6042)
 
 ## Features
@@ -23,7 +24,7 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   ```
   Windows
     ```ps
-  ./lollipop.exe
+  lollipop.exe
   ```
   Lollipop has a built-in guide. Type these commands to find out what the commands and them flags do:
   <br>
@@ -34,8 +35,8 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   ```
   Windows
     ```ps
-  ./lollipop.exe help get
-  ./lollipop.exe help down
+  lollipop.exe help get
+  lollipop.exe help down
   ```
   ## How to use (example)
   Lollipop uses tags to download from YouTube. You have to provide it your desired video tag and audio tag, for example, the command below:
