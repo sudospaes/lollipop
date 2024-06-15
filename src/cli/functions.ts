@@ -43,13 +43,23 @@ export async function downloadVideo(link: string, tag: string) {
   let quality = "";
   let codec = "";
   console.log("I am detecting video...");
-  info.formats.forEach((item) => {
-    if (item.itag == +tag) {
-      extension = item.container;
-      quality = item.qualityLabel;
-      codec = item.codecs;
-    }
-  });
+  if (tag == "highest") {
+    const highest = ytdl.chooseFormat(info.formats, {
+      quality: "highestvideo",
+    });
+    extension = highest.container;
+    quality = highest.qualityLabel;
+    codec = highest.codecs;
+    tag = highest.itag.toString();
+  } else {
+    info.formats.forEach((item) => {
+      if (item.itag == +tag) {
+        extension = item.container;
+        quality = item.qualityLabel;
+        codec = item.codecs;
+      }
+    });
+  }
   const path = join(
     dirname(process.execPath),
     `${title}-${quality}-${codec}-video.${extension}`
@@ -94,14 +104,25 @@ export async function downloadAudio(link: string, tag: string) {
   let codec = "";
   let channels = 0;
   console.log("I am detecting audio...");
-  info.formats.forEach((item) => {
-    if (item.itag == +tag) {
-      extension = item.container;
-      bitrate = item.audioBitrate!;
-      codec = item.codecs;
-      channels = item.audioChannels!;
-    }
-  });
+  if (tag == "highest") {
+    const highest = ytdl.chooseFormat(info.formats, {
+      quality: "highestaudio",
+    });
+    extension = highest.container;
+    bitrate = highest.audioBitrate!;
+    codec = highest.codecs;
+    channels = highest.audioChannels!;
+    tag = highest.itag.toString();
+  } else {
+    info.formats.forEach((item) => {
+      if (item.itag == +tag) {
+        extension = item.container;
+        bitrate = item.audioBitrate!;
+        codec = item.codecs;
+        channels = item.audioChannels!;
+      }
+    });
+  }
   const path = join(
     dirname(process.execPath),
     `${title}-${bitrate}-${codec}-audio.${extension}`

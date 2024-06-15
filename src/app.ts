@@ -24,7 +24,7 @@ app
       "#D04848"
     )("<3")}`
   )
-  .version(`0.0.1`, "--version")
+  .version(`0.0.3`, "--version")
   .usage("[command]")
   .option("--debug", "simple debugger, it's a joke XD")
   .addOption(new Option("-h, --help").hideHelp());
@@ -63,6 +63,9 @@ app
     )} youtube_link -v tag_number -a tag_number
     ${chalk.hex("#DC84F3")(
       `In standard download, I download video and audio separately and merging them with ffmpeg`
+    )}
+    ${chalk.hex("#DC84F3")(
+      `If you don't provide video tag and audio tag, I'll download highest qualities of them`
     )}\n
     download only video => ${chalk.yellow("down")} youtube_link -v tag_number\n
     download only audio => ${chalk.yellow(
@@ -118,6 +121,13 @@ app
       } else {
         Wrong.audioTagNotFound();
       }
+    } else {
+      const video = await downloadVideo(link, "highest");
+      const audio = await downloadAudio(link, "highest");
+      if (options.mp3) {
+        audio.path = await conevrtToMp3(audio);
+      }
+      merging(video, audio);
     }
   });
 
