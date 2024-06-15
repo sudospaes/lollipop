@@ -25,7 +25,7 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
     ```ps
   ./lollipop.exe
   ```
-  lollipop has a built-in guide. Type these commands to find out what the commands and them flags do
+  Lollipop has a built-in guide. Type these commands to find out what the commands and them flags do:
   <br>
   Linux/MacOS
     ```bash
@@ -46,7 +46,7 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   ```bash
   ./lollipop get https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah
   ```
-  You will get this output lollipop
+  You will get this output from lollipop:
   <br>
   ![get-command](https://github.com/sudospaes/lollipop/assets/79229394/37a55976-b14b-4a29-8926-fa74d3cca977)
   <br>
