@@ -38,11 +38,13 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   ./lollipop.exe help down
   ```
   ## How to use (example)
-  Lollipop uses tags to download from YouTube. You have to provide him the desired video tag and the desired audio tag, for example, the command below:
+  Lollipop uses tags to download from YouTube. You have to provide it your desired video tag and audio tag, for example, the command below:
   ```bash
   ./lollipop down youtube_link -v tag_number -a tag_number
   ```
-  Lollipop has not left you alone to get the number tag. You can get the necessary information using the get command, see this example:
+   <span>If you won't do that. It's be fine. just type ```./lollipop down youtube_link``` to lollipop downloading highest qualities for you :3</span>
+   
+  Lollipop has not left you alone to get the number tag. You can get the information with using get command, see this example:
   ```bash
   ./lollipop get https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah
   ```
