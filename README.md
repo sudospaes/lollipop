@@ -2,7 +2,7 @@
 
 A friendly and lovely cli youtube downloader written in typescript for Linux, MacOS, Windows.
 
-![preview](https://github.com/hctilg/lollipop/assets/98208009/56b1d81f-b67d-4b5b-a338-430db60c1a88)
+![preview](preview.png)
 
 ## Features
 - Download video and audio separately
