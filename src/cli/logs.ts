@@ -51,7 +51,7 @@ export class Wrong {
   }
   static audioTagNotFound() {
     const output = `${chalk.hex("#9BABB8")(
-      ":("
+      "T~T"
     )} I can't find this audio tag. Please use ${chalk.yellow.underline(
       "get"
     )} command to see available tags`;
@@ -59,7 +59,7 @@ export class Wrong {
   }
   static videoTagNotFound() {
     const output = `${chalk.hex("#9BABB8")(
-      ":("
+      "T~T"
     )} I can't find this video tag. Please use ${chalk.yellow.underline(
       "get"
     )} command to see available tags`;

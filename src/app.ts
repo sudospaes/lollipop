@@ -82,10 +82,15 @@ app
       debug.enable = true;
     }
     checkLink(link);
+    let isVideoTagValid,
+      isAudioTagValid = true;
     if (options.v && options.a) {
-      console.log("Please wait for tag validation...");
-      const isVideoTagValid = await isTagValid(link, options.v);
-      const isAudioTagValid = await isTagValid(link, options.a);
+      if (options.v != "highest") {
+        isVideoTagValid = await isTagValid(link, options.v);
+      }
+      if (options.a != "highest") {
+        isAudioTagValid = await isTagValid(link, options.a);
+      }
       if (isVideoTagValid && isAudioTagValid) {
         const video = await downloadVideo(link, options.v);
         const audio = await downloadAudio(link, options.a);
@@ -101,8 +106,9 @@ app
         }
       }
     } else if (options.v) {
-      console.log("Please wait for tag validation...");
-      const isVideoTagValid = await isTagValid(link, options.v);
+      if (options.v != "highest") {
+        isVideoTagValid = await isTagValid(link, options.a);
+      }
       if (isVideoTagValid) {
         console.log("I will download only video...");
         downloadVideo(link, options.v);
@@ -110,8 +116,9 @@ app
         Wrong.videoTagNotFound();
       }
     } else if (options.a) {
-      console.log("Please wait for tag validation...");
-      const isAudioTagValid = await isTagValid(link, options.a);
+      if (options.a != "highest") {
+        isAudioTagValid = await isTagValid(link, options.a);
+      }
       if (isAudioTagValid) {
         console.log("I will download only audio...");
         const audio = await downloadAudio(link, options.a);
