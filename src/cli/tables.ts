@@ -3,7 +3,7 @@ import table from "easy-table";
 import chalk from "chalk";
 import moment from "moment";
 
-import { secondstoTime, kbToSize } from "../utils/ulits";
+import { secondstoTime, formatBytes } from "../utils/ulits";
 
 export function drawBasicTable(info: videoInfo) {
   const title = `${chalk.bold.inverse(" Title ")} ==> ${
@@ -31,7 +31,7 @@ export function drawVideoQualityTable(formats: videoFormat[]) {
       t.cell(chalk.magenta("Quality"), chalk.magenta(i.qualityLabel));
       t.cell(chalk.blue("Format"), chalk.blue(i.container));
       t.cell(chalk.green("Codec"), chalk.green(i.videoCodec));
-      t.cell(chalk.yellow("Size"), chalk.yellow(kbToSize(+i.contentLength)));
+      t.cell(chalk.yellow("Size"), chalk.yellow(formatBytes(+i.contentLength)));
       t.sort([`${chalk.blue("Format")}|des`]);
       t.newRow();
     }
@@ -47,7 +47,7 @@ export async function drawAudioQualityTable(formats: videoFormat[]) {
       t.cell(chalk.cyan("Tag"), chalk.cyan(i.itag));
       t.cell(chalk.magenta("Bitrate"), chalk.magenta(i.audioBitrate));
       t.cell(chalk.green("Codec"), chalk.green(i.audioCodec));
-      t.cell(chalk.yellow("Size"), chalk.yellow(kbToSize(+i.contentLength)));
+      t.cell(chalk.yellow("Size"), chalk.yellow(formatBytes(+i.contentLength)));
       t.sort([`${chalk.magenta("Bitrate")}|des`]);
       t.newRow();
     }

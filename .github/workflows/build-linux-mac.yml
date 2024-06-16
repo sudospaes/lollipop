@@ -45,6 +45,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref }}     
-          file: lollipop-${{ matrix.osName }}-${{ matrix.arch }}
+          file: build/lollipop-${{ matrix.osName }}-${{ matrix.arch }}
           asset_name: lollipop-${{ matrix.osName }}-${{ matrix.arch }}
           prerelease: true

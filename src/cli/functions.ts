@@ -11,7 +11,7 @@ import {
   drawBasicTable,
 } from "./tables";
 import { Successful, Wrong } from "./logs";
-import { secondstoTime, kbToSize } from "../utils/ulits";
+import { secondstoTime, formatBytes } from "../utils/ulits";
 import { IVideoObject, IAudioObject } from "./interface";
 
 export const debug = {
@@ -71,7 +71,7 @@ export async function downloadVideo(link: string, tag: string) {
         readline.clearLine(process.stdout, 0);
         readline.cursorTo(process.stdout, 0);
         process.stdout.write(
-          `Downloading video: ${kbToSize(downloaded)} / ${kbToSize(total)}`
+          `Downloading video: ${formatBytes(downloaded)} / ${formatBytes(total)}`
         );
       })
       .on("finish", () => {
@@ -134,7 +134,7 @@ export async function downloadAudio(link: string, tag: string) {
         readline.clearLine(process.stdout, 0);
         readline.cursorTo(process.stdout, 0);
         process.stdout.write(
-          `Downloaging audio: ${kbToSize(downloaded)} / ${kbToSize(total)}`
+          `Downloaging audio: ${formatBytes(downloaded)} / ${formatBytes(total)}`
         );
       })
       .on("finish", () => {

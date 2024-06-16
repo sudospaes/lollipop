@@ -13,24 +13,15 @@ export function secondstoTime(s: number) {
   return time;
 }
 
-export function kbToSize(kilobit: number) {
-  if (Number.isNaN(kilobit)) {
-    return "Incalculable";
-  }
-  const megabytes = kilobit / 1024 / 1024;
-  if (megabytes >= 1024) {
-    const gigabyte = megabytes / 1024;
-    return gigabyte.toFixed(2) + "GB";
-  }
-  return megabytes.toFixed(2) + "MB";
-}
+export function formatBytes(bytes: number, decimals: number = 2) {
+  if (Number.isNaN(bytes)) return "Incalculable";
+  if (!+bytes) return "0 B";
 
-//? It's for future :)
-// export function toSize(kilobyte: number) {
-//   const megabytes = kilobyte / 1024;
-//   if (megabytes >= 1024) {
-//     const gigabyte = megabytes / 1024;
-//     return gigabyte.toFixed(2) + "GB";
-//   }
-//   return megabytes.toFixed(2) + "MB";
-// }
+  let i = 0;
+  for (i; bytes >= 1024; i++) bytes /= 1024;
+
+  const dm = bytes % 1 === 0 ? 0 : decimals;
+  const units = ["B", "KB", "MB", "GB", "TB", "PB"];
+  
+  return `${bytes.toFixed(dm)} ${units[i]}`;
+}
