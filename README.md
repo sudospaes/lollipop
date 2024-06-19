@@ -45,7 +45,7 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   ```
    <span>If you won't do that. It's be fine. just type ```./lollipop down youtube_link``` to lollipop downloading highest qualities for you :3</span>
    
-  Lollipop has not left you alone to get the number tag. You can get the information with using get command, see this example:
+  Lollipop has not left you alone to get the tag number. You can get the information with using get command, see this example:
   ```bash
   ./lollipop get https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah
   ```
