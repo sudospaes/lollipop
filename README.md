@@ -12,33 +12,27 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
 ## Requirement
 - Lollipop use [ffmpeg](https://ffmpeg.org/), so you should installed that
 
-## How to run
+## Installation (Linux/MacOS)
+- Run this command on your terminal to install lollipop:
+  <br>
+  ```bash
+  curl -fsSL https://raw.githubusercontent.com/sudospaes/lollipop/main/install.sh | bash
+  ```
+- Run these to verify:
+  <br>
+    ```bash
+  lollipop
+  ```
+## Installation (Windows)
+**No installer has been written for Windows yet**
 - Download latest version from [release](https://github.com/sudospaes/lollipop/releases)
 - Rename downloaded file to `lollipop`
 - Open terminal or cmd and run lollipop:
   <br>
-  Linux/MacOS
-    ```bash
-  chmod +x lollipop
-  ./lollipop
-  ```
-  Windows
     ```ps
-  lollipop.exe
+  ./lollipop.exe
   ```
-  Lollipop has a built-in guide. Type these commands to find out what the commands and them flags do:
-  <br>
-  Linux/MacOS
-    ```bash
-  ./lollipop help get
-  ./lollipop help down
-  ```
-  Windows
-    ```ps
-  lollipop.exe help get
-  lollipop.exe help down
-  ```
-  ## How to use (example)
+## How to use (example)
   Lollipop uses tags to download from YouTube. You have to provide it your desired video tag and audio tag, for example, the command below:
   ```bash
   ./lollipop down youtube_link -v tag_number -a tag_number
