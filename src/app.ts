@@ -24,7 +24,7 @@ app
       "#D04848"
     )("<3")}`
   )
-  .version(`0.0.4`, "--version")
+  .version(`0.0.5`, "--version")
   .usage("[command]")
   .option("--debug", "simple debugger, it's a joke XD")
   .addOption(new Option("-h, --help").hideHelp());
