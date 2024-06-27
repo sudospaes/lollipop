@@ -14,24 +14,21 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
 
 ## Installation (Linux/MacOS)
 - Run this command on your terminal to install lollipop:
-  <br>
+ 
   ```bash
   curl -fsSL https://raw.githubusercontent.com/sudospaes/lollipop/main/install.sh | bash
   ```
-- Run these to verify:
-  <br>
-    ```bash
-  lollipop
-  ```
+
 ## Installation (Windows)
 **No installer has been written for Windows yet**
 - Download latest version from [release](https://github.com/sudospaes/lollipop/releases)
 - Rename downloaded file to `lollipop`
 - Open terminal or cmd and run lollipop:
-  <br>
+
     ```ps
   ./lollipop.exe
   ```
+    
 ## How to use (example)
   Lollipop uses tags to download from YouTube. You have to provide it your desired video tag and audio tag, for example, the command below:
   ```bash
@@ -40,8 +37,13 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   ```ps
   Windows : ./lollipop.exe down youtube_link -v tag_number -a tag_number
   ```
-   <span>If you won't do that. It's be fine. just type ```./lollipop down youtube_link``` to lollipop downloading highest qualities for you :3</span>
-   
+   If you won't do that. It's be fine. just type ```lollipop down youtube_link``` to lollipop downloading highest qualities for you or
+  ```bash
+  Linux/MacOS : lollipop down youtube_link -v highest -a highest
+  ```
+  ```ps
+  Windows : ./lollipop.exe down youtube_link -v highest -a highest
+  ```
   Lollipop has not left you alone to get the tag number. You can get the information with using get command, see this example:
   ```bash
   Linux/MacOS : lollipop get https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah
@@ -60,3 +62,14 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   ```ps
   Windows : ./lollipop.exe down https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah -v 137 -a 251
   ```
+## All commands and flags
+| Command | Description |
+|:-----|:----------------:|
+|`get`| Get youtube links infomation |
+|`down`| Download from youtube |
+
+| Flag name | Description |
+|:-----|:----------------:|
+|`-v`| It's for provide video quality |
+|`-a`| It's for provide audio quality |
+|`--mp3`| Convert audio to mp3 |
