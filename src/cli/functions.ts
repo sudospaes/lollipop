@@ -3,7 +3,7 @@ import ffmpeg from "fluent-ffmpeg";
 
 import fs from "fs";
 import readline from "readline";
-import { join, dirname } from "path";
+import { join } from "path";
 
 import {
   drawAudioQualityTable,
@@ -38,7 +38,7 @@ export async function downloadVideo(link: string, tag: string) {
     Wrong.internet(err, debug.enable);
     process.exit(1);
   }
-  const title = info.videoDetails.title;
+  const title = info.videoDetails.title.replace(/\//g, "");
   let extension = "";
   let quality = "";
   let codec = "";
@@ -61,7 +61,7 @@ export async function downloadVideo(link: string, tag: string) {
     });
   }
   const path = join(
-    dirname(process.execPath),
+    process.cwd(),
     `${title}-${quality}-${codec}-video.${extension}`
   );
   return new Promise<IVideoObject>((resolve, reject) => {
@@ -71,7 +71,9 @@ export async function downloadVideo(link: string, tag: string) {
         readline.clearLine(process.stdout, 0);
         readline.cursorTo(process.stdout, 0);
         process.stdout.write(
-          `Downloading video: ${formatBytes(downloaded)} / ${formatBytes(total)}`
+          `Downloading video: ${formatBytes(downloaded)} / ${formatBytes(
+            total
+          )}`
         );
       })
       .on("finish", () => {
@@ -98,7 +100,7 @@ export async function downloadAudio(link: string, tag: string) {
     Wrong.internet(err, debug.enable);
     process.exit(1);
   }
-  const title = info.videoDetails.title;
+  const title = info.videoDetails.title.replace(/\//g, "");
   let extension = "";
   let bitrate = 0;
   let codec = "";
@@ -124,7 +126,7 @@ export async function downloadAudio(link: string, tag: string) {
     });
   }
   const path = join(
-    dirname(process.execPath),
+    process.cwd(),
     `${title}-${bitrate}-${codec}-audio.${extension}`
   );
   return new Promise<IAudioObject>((resolve, reject) => {
@@ -134,7 +136,9 @@ export async function downloadAudio(link: string, tag: string) {
         readline.clearLine(process.stdout, 0);
         readline.cursorTo(process.stdout, 0);
         process.stdout.write(
-          `Downloaging audio: ${formatBytes(downloaded)} / ${formatBytes(total)}`
+          `Downloaging audio: ${formatBytes(downloaded)} / ${formatBytes(
+            total
+          )}`
         );
       })
       .on("finish", () => {
@@ -154,12 +158,12 @@ export async function downloadAudio(link: string, tag: string) {
 }
 
 export function merging(video: IVideoObject, audio: IAudioObject) {
-  const path = `${video.title}-${video.quality}-${video.codec}.${video.extension}`;
+  const outputName = `${video.title}-${video.quality}-${video.codec}.${video.extension}`;
   let totalTime: number;
   ffmpeg()
     .mergeAdd(video.path)
     .mergeAdd(audio.path)
-    .save(join(dirname(process.execPath), path))
+    .save(join(process.cwd(), outputName))
     .on("codecData", (data) => {
       totalTime = parseInt(data.duration.replace(/:/g, ""));
     })
@@ -168,7 +172,7 @@ export function merging(video: IVideoObject, audio: IAudioObject) {
       const percent = (time / totalTime) * 100;
       readline.clearLine(process.stdout, 0);
       readline.cursorTo(process.stdout, 0);
-      process.stdout.write(`Merging video with audio - ${percent.toFixed(2)}%`);
+      process.stdout.write(`Merging video with audio - ${percent.toFixed(0)}%`);
     })
     .on("end", () => {
       console.log("\nMerging Done :D");
@@ -190,7 +194,7 @@ export function conevrtToMp3(audio: IAudioObject) {
       .format("mp3")
       .audioBitrate(audio.bitrate)
       .audioChannels(audio.channels)
-      .save(join(dirname(process.execPath), path))
+      .save(join(process.cwd(), path))
       .on("codecData", (data) => {
         totalTime = parseInt(data.duration.replace(/:/g, ""));
       })
@@ -199,7 +203,7 @@ export function conevrtToMp3(audio: IAudioObject) {
         const percent = (time / totalTime) * 100;
         readline.clearLine(process.stdout, 0);
         readline.cursorTo(process.stdout, 0);
-        process.stdout.write(`Converting to mp3 - ${percent.toFixed(2)}`);
+        process.stdout.write(`Converting to mp3 - ${percent.toFixed(0)}`);
       })
       .on("end", () => {
         console.log("\nAudio converted to mp3 file :D");
