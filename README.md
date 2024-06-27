@@ -35,13 +35,19 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
 ## How to use (example)
   Lollipop uses tags to download from YouTube. You have to provide it your desired video tag and audio tag, for example, the command below:
   ```bash
-  ./lollipop down youtube_link -v tag_number -a tag_number
+  Linux/MacOS : lollipop down youtube_link -v tag_number -a tag_number
+  ```
+  ```ps
+  Windows : ./lollipop.exe down youtube_link -v tag_number -a tag_number
   ```
    <span>If you won't do that. It's be fine. just type ```./lollipop down youtube_link``` to lollipop downloading highest qualities for you :3</span>
    
   Lollipop has not left you alone to get the tag number. You can get the information with using get command, see this example:
   ```bash
-  ./lollipop get https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah
+  Linux/MacOS : lollipop get https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah
+  ```
+  ```ps
+  Windows : ./lollipop.exe get https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah
   ```
   You will get this output from lollipop:
   <br>
@@ -49,5 +55,8 @@ A friendly and lovely cli youtube downloader written in typescript for Linux, Ma
   <br>
   Now you know video tag and audio tag. so, run this command to download them and auto-merging with lollipop:
   ```bash
-  ./lollipop down https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah -v 137 -a 251
+  Linux/MacOS : lollipop down https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah -v 137 -a 251
+  ```
+  ```ps
+  Windows : ./lollipop.exe down https://youtu.be/-dYB0xfE7qs?si=29PqrPHpJ2Xd1lah -v 137 -a 251
   ```
