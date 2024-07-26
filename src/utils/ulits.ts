@@ -22,6 +22,19 @@ export function formatBytes(bytes: number, decimals: number = 2) {
 
   const dm = bytes % 1 === 0 ? 0 : decimals;
   const units = ["B", "KB", "MB", "GB", "TB", "PB"];
-  
+
   return `${bytes.toFixed(dm)} ${units[i]}`;
+}
+
+export function filtering(text: string) {
+  // Define the characters to be removed
+  const charsToRemove = "#%&{}\\/<>*? $!'\":@+|=";
+
+  // Create a regex pattern that matches any of the characters
+  const pattern = new RegExp(
+    `[${charsToRemove.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}]`,
+    "g"
+  );
+
+  return text.replace(pattern, "");
 }

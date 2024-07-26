@@ -11,7 +11,7 @@ import {
   drawBasicTable,
 } from "./tables";
 import { Successful, Wrong } from "./logs";
-import { secondstoTime, formatBytes } from "../utils/ulits";
+import { secondstoTime, formatBytes, filtering } from "../utils/ulits";
 import { IVideoObject, IAudioObject } from "./interface";
 
 export const debug = {
@@ -38,7 +38,7 @@ export async function downloadVideo(link: string, tag: string) {
     Wrong.internet(err, debug.enable);
     process.exit(1);
   }
-  const title = info.videoDetails.title.replace(/\//g, "");
+  const title = filtering(info.videoDetails.title);
   let extension = "";
   let quality = "";
   let codec = "";
@@ -100,7 +100,7 @@ export async function downloadAudio(link: string, tag: string) {
     Wrong.internet(err, debug.enable);
     process.exit(1);
   }
-  const title = info.videoDetails.title.replace(/\//g, "");
+  const title = filtering(info.videoDetails.title);
   let extension = "";
   let bitrate = 0;
   let codec = "";
