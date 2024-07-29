@@ -1,4 +1,4 @@
-import { videoInfo, videoFormat } from "ytdl-core";
+import { videoInfo, videoFormat } from "@distube/ytdl-core";
 import table from "easy-table";
 import chalk from "chalk";
 import moment from "moment";
