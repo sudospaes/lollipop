@@ -27,14 +27,10 @@ export function formatBytes(bytes: number, decimals: number = 2) {
 }
 
 export function filtering(text: string) {
-  // Define the characters to be removed
-  const charsToRemove = "#%&{}\\/<>*? $!'\":@+|=";
-
-  // Create a regex pattern that matches any of the characters
-  const pattern = new RegExp(
-    `[${charsToRemove.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}]`,
-    "g"
-  );
+  const chars = "#%&{}\\/<>*?$!'\":@+|=";
+  //* If you can't understand these, is normal. Its regex
+  const charsToRemove = chars.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const pattern = new RegExp(`[${charsToRemove}]`, "g");
 
   return text.replace(pattern, "");
 }

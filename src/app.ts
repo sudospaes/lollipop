@@ -9,7 +9,6 @@ import {
   downloadAudio,
   merging,
   conevrtToMp3,
-  debug,
 } from "./cli/functions";
 import { Wrong } from "./cli/logs";
 
@@ -26,7 +25,6 @@ app
   )
   .version(`0.0.7`, "--version")
   .usage("[command]")
-  .option("--debug", "simple debugger, it's a joke XD")
   .addOption(new Option("-h, --help").hideHelp());
 
 app
@@ -40,9 +38,6 @@ app
     ${chalk.yellow("get")} youtube_link`
   )
   .action(async (link, options) => {
-    if (options.debug) {
-      debug.enable = true;
-    }
     checkLink(link);
     linkInfomation(link);
   });
@@ -78,9 +73,6 @@ app
     )}`
   )
   .action(async (link, options) => {
-    if (options.debug) {
-      debug.enable = true;
-    }
     checkLink(link);
     let isVideoTagValid,
       isAudioTagValid = true;

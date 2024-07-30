@@ -14,10 +14,6 @@ import { Successful, Wrong } from "./logs";
 import { secondstoTime, formatBytes, filtering } from "../utils/ulits";
 import { IVideoObject, IAudioObject } from "./interface";
 
-export const debug = {
-  enable: false,
-};
-
 export async function linkInfomation(link: string) {
   try {
     const info = await ytdl.getInfo(link);
@@ -25,7 +21,7 @@ export async function linkInfomation(link: string) {
     drawVideoQualityTable(info.formats);
     drawAudioQualityTable(info.formats);
   } catch (err) {
-    Wrong.internet(err, debug.enable);
+    Wrong.internet(err);
     process.exit(1);
   }
 }
@@ -35,7 +31,7 @@ export async function downloadVideo(link: string, tag: string) {
   try {
     info = await ytdl.getInfo(link);
   } catch (err) {
-    Wrong.internet(err, debug.enable);
+    Wrong.internet(err);
     process.exit(1);
   }
   const title = filtering(info.videoDetails.title);
@@ -85,7 +81,7 @@ export async function downloadVideo(link: string, tag: string) {
         resolve({ path, title, extension, quality, codec });
       })
       .on("error", (err) => {
-        Wrong.errorOnVideoBuffers(err, debug.enable);
+        Wrong.errorOnVideoBuffers(err);
         process.exit(1);
       })
       .pipe(fs.createWriteStream(path));
@@ -97,7 +93,7 @@ export async function downloadAudio(link: string, tag: string) {
   try {
     info = await ytdl.getInfo(link);
   } catch (err) {
-    Wrong.internet(err, debug.enable);
+    Wrong.internet(err);
     process.exit(1);
   }
   const title = filtering(info.videoDetails.title);
@@ -150,7 +146,7 @@ export async function downloadAudio(link: string, tag: string) {
         resolve({ path, title, codec, extension, channels, bitrate });
       })
       .on("error", (err) => {
-        Wrong.errorOnAudioBuffers(err, debug.enable);
+        Wrong.errorOnAudioBuffers(err);
         process.exit(1);
       })
       .pipe(fs.createWriteStream(path));
@@ -180,7 +176,7 @@ export function merging(video: IVideoObject, audio: IAudioObject) {
       fs.unlinkSync(audio.path);
     })
     .on("error", (err) => {
-      Wrong.errorOnMerging(err, debug.enable);
+      Wrong.errorOnMerging(err);
       process.exit(1);
     });
 }
@@ -211,7 +207,7 @@ export function conevrtToMp3(audio: IAudioObject) {
         resolve(path);
       })
       .on("error", (err) => {
-        Wrong.errorOnAudioBuffers(err, debug.enable);
+        Wrong.errorOnAudioBuffers(err);
         process.exit(1);
       });
   });
@@ -229,7 +225,7 @@ export async function isTagValid(link: string, tag: string) {
   try {
     info = await ytdl.getInfo(link);
   } catch (err) {
-    Wrong.internet(err, debug.enable);
+    Wrong.internet(err);
     process.exit(1);
   }
   for (const item of info.formats) {
