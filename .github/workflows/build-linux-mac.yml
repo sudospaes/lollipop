@@ -38,7 +38,7 @@ jobs:
         run: |
           # install dependencies and build
           npm i
-          npm build
+          npm run build
           npm run make-${{ matrix.osName }}-${{ matrix.arch }}
 
       - name: Upload linux/mac builds to GH release
