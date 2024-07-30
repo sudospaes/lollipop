@@ -10,13 +10,13 @@ jobs:
     strategy:
       matrix:
         os:
-          - ubuntu-latest
+          - ubuntu-20.04
           - macos-latest
         platform:
           - amd64
           - arm64
         include:
-          - os: ubuntu-latest
+          - os: ubuntu-20.04
             osName: linux
           - os: macos-latest
             osName: macos
