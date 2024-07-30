@@ -12,6 +12,7 @@ import {
 } from "./cli/functions";
 import { Wrong } from "./cli/logs";
 
+process.env.YTDL_NO_UPDATE = "1";
 const app = new Command();
 
 app
