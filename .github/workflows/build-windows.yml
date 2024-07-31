@@ -1,4 +1,4 @@
-name: Release lollipop windows
+name: Release lollipop for windows
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
       - name: Setup nodeJS
         uses: actions/setup-node@v4
         with:
-          node-version: "latest"
+          node-version: 20
 
       - name: Build lollipop
         run: |
