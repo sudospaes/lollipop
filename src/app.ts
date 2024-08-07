@@ -12,7 +12,8 @@ import {
 } from "./cli/functions";
 import { Wrong } from "./cli/logs";
 
-process.env.YTDL_NO_UPDATE = "1";
+import "./preload";
+
 const app = new Command();
 
 app
@@ -30,14 +31,9 @@ app
 
 app
   .command("get")
-  .description("show youtube link details for you :3")
+  .description("show youtube link details")
   .argument("<link>", "youtube link")
   .addOption(new Option("-h, --help").hideHelp())
-  .addHelpText(
-    "after",
-    `${chalk.green("\nExamples:")}
-    ${chalk.yellow("get")} youtube_link`
-  )
   .action(async (link, options) => {
     checkLink(link);
     linkInfomation(link);
@@ -45,34 +41,12 @@ app
 
 app
   .command("down")
-  .description("download youtube videos/audios for you :P")
+  .description("download youtube video/audio")
   .argument("<link>", "youtube link")
   .option("-v <tag>", "pass the video tag you got from the get command")
   .option("-a <tag>", "pass the audio tag you got from the get command")
   .option("--mp3", "this flag is only used together with -a flag")
   .addOption(new Option("-h, --help").hideHelp())
-  .addHelpText(
-    "after",
-    `${chalk.green("\nExamples:")}
-    standard download => ${chalk.yellow(
-      "down"
-    )} youtube_link -v tag_number -a tag_number
-    ${chalk.hex("#DC84F3")(
-      `In standard download, I download video and audio separately and merging them with ffmpeg`
-    )}
-    ${chalk.hex("#DC84F3")(
-      `If you don't provide video tag and audio tag, I'll download highest qualities of them`
-    )}\n
-    download only video => ${chalk.yellow("down")} youtube_link -v tag_number\n
-    download only audio => ${chalk.yellow(
-      "down"
-    )} youtube_link -a tag_number --mp3
-    ${chalk.hex("#DC84F3")(
-      `If you use ${chalk.blue("--mp3")} with ${chalk.blue(
-        "-a"
-      )} flag, It will convert audio to mp3 with ffmpeg`
-    )}`
-  )
   .action(async (link, options) => {
     checkLink(link);
     let isVideoTagValid,
