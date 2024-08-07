@@ -25,7 +25,7 @@ app
       "#D04848"
     )("<3")}`
   )
-  .version("0.0.9", "--version")
+  .version("0.0.10", "--version")
   .usage("[command]")
   .addOption(new Option("-h, --help").hideHelp());
 
